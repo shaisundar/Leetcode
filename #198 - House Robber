@@ -1,0 +1,23 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums)<=2:
+            return(max(nums))
+            
+        l=[nums[0],nums[1]]
+        n=2
+        
+        while n<len(nums):
+            if n>=3:
+                print(nums[n]+l[n-2], nums[n]+l[n-3])
+                if nums[n]+l[n-2]>=nums[n]+l[n-3]:
+                    l.append(nums[n]+l[n-2])
+                else:
+                    l.append(nums[n]+l[n-3])
+            else:
+                l.append(nums[n]+l[n-2])
+            n+=1
+        return(max(l))
+        
+ # the core of this problem - max value for the nth house -max or (value fo nth house + n-2th house) OR (nth house + n-3rd house)
+ # n-4th house will already be included in the n-2th case, and so on - closing any missing houses in the past.
+ # We need to check for outliers - When number of house are 1,2 - we just return the max of the list .
