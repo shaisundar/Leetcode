@@ -1,0 +1,17 @@
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        target=len(cost)
+        l=[0,0]
+        n=2
+        while n<=len(cost):
+            if(l[n-2]+cost[n-2])<(l[n-1]+cost[n-1]):
+                l.append(l[n-2]+cost[n-2])
+            else:
+                l.append(l[n-1]+cost[n-1])
+            n+=1
+        return(l[n-1])
+        
+  # the cost to reach 1st 2 steps = 0
+  # we update the cost of consecutive steps by taking the min of previous 2 steps + their cost (We store this info as we go in an array)
+  # the number after we have reached the last step is the top
+  
