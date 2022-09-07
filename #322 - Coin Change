@@ -1,0 +1,29 @@
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        dp = collections.defaultdict(lambda:math.inf)
+        
+        if amount==0:
+            return 0
+        
+        if amount<min(coins):
+            return -1
+        
+        
+        for i in range(1,amount+1):
+            if i in coins:
+                dp[i]=1
+            else:
+                for j in coins:
+                    rem = i - j
+                    dp[i]= min(dp[rem]+dp[j],dp[i])
+                    
+            
+        if dp[amount]==math.inf:
+            return -1
+        else:
+            return dp[amount]
+                
+  # Get base cases, if amount = 0, return 0. If amount<min coins, retrun -1
+  # we build up the dp array as we go, for each number uptil amount - (we take a number - each coin), and check the dp array for this remaining amount
+  # We save the min of the results. 
+  # We return the dp[amount finally]
