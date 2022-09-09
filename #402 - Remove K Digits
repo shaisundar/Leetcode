@@ -1,0 +1,28 @@
+class Solution:
+    def removeKdigits(self, num: str, k: int) -> str:
+        s=collections.deque()
+        kk=1
+        for i in range(len(num)):
+            if i == 0:
+                s.append(int(num[i]))
+                continue
+            while s and kk<=k and int(num[i])<s[-1]:
+                s.pop()
+                kk+=1
+            s.append(int(num[i]))
+        while kk<=k:
+            s.pop()
+            kk+=1
+        while s and s[0]==0:
+            s.popleft()
+        
+        res=""
+        for i in s:
+            res+=str(i)
+        if res=="":
+            return"0"
+        return str(res)
+    
+ # Start from left
+ # if next digit is greater than 1 left digit, pop the left digit and put the right digit into the stack.
+ # remove all 0's from the start
