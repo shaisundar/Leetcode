@@ -1,0 +1,25 @@
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        left=0
+        right=1
+        res=0
+        locmax=0
+        
+        while right<len(prices):
+            dif = prices[right]-prices[left]
+            if(dif<locmax):
+                left=right
+                res+=locmax
+                locmax=0
+            else:
+                print("here", dif, prices[left], prices[right])
+                locmax = max(locmax, dif)
+                print(locmax)
+            right+=1
+        
+        res+=locmax
+        return(res)
+        
+  #if right<left: set left to right, add to res, set local_max=0
+  # else keep updating local_max
+  #add localmax at the end (for edge case, full increasin array)
