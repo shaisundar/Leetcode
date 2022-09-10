@@ -1,0 +1,21 @@
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        left=0
+        right=1
+        max1=0
+        
+        while right<len(prices):
+            if prices[right]<=prices[left]:
+                left=right
+            else:
+                print("here", max1, prices[right], prices[left])
+                dif = prices[right]-prices[left]
+                print(dif)
+                max1 = max(max1,dif)
+                print(max1)
+            right+=1
+            
+        return(max1)
+        
+ # Keep 2 pointers, if right pointer more than left, move left to right
+ # dif = max(dif, prices[right-left])
