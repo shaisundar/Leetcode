@@ -1,0 +1,33 @@
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        maxl=0
+        maxr=0
+        l=0
+        r=len(height)-1
+        res=0
+        
+        while l<=r:
+            if height[l]<maxl:
+                res+=(maxl-height[l])
+                print(l,r,res)
+            else:
+                maxl=height[l]
+            if height[r]<maxr:
+                res+=(maxr-height[r])
+                print(l,r,res)
+            else:
+                maxr=height[r]
+            if maxr>maxl:
+                l+=1
+            elif maxl>maxr:
+                r-=1
+            elif maxl==maxr:
+                l+=1
+        return res
+        
+  # keep a leftmax and rightmax
+  # (l) starts at 0, (r) starts at right most
+  # move (l) to right, (r) to left.
+  # if l<maxl, add to res, if r<maxr, add to res
+  # based on maxl is small, or right r is small, whichever is smaller, move (l) or (r) - smaller one should move. 
+  
