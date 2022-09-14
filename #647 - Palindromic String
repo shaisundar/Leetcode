@@ -1,0 +1,28 @@
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        res=0
+        
+        #for odd palindromes
+        for i in range(len(s)):
+            l=i
+            r=i
+            while l>=0 and r<len(s) and s[l]==s[r]:
+                print(l,r)
+                res+=1
+                l-=1
+                r+=1
+        #for even palindromes
+        for i in range(len(s)):
+            l=i
+            r=i+1
+            while l>=0 and r<len(s) and s[l]==s[r]:
+                print(l,r)
+                res+=1
+                l-=1
+                r+=1
+        return(res)
+        
+ 
+ # Core concept - keep left pointer at 1st letter though last letter
+ # for each letter see left side and right side, if they are equal, its a palindrome. 
+ # Lastly, Do once for odd palindromes, and once for even palindromes by considering 2 letters in the first case. 
