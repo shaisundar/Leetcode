@@ -1,0 +1,52 @@
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        q = collections.deque()
+        
+        rows=len(grid)
+        cols = len(grid[0])
+        fresh=0
+        
+        for i in range(rows):
+            for j in range(cols):
+                if grid[i][j]==2:
+                    q.append([i,j])
+                if grid[i][j]==1:
+                    fresh+=1
+        if fresh==0:
+            return 0
+                    
+        t=0
+        tmpq=collections.deque()
+        while q:
+            for _ in range(len(q)):
+                #print("q=",q)
+                curr=q.popleft()
+                i=curr[0]
+                j=curr[1]
+                if i+1<rows and grid[i+1][j]==1:
+                    tmpq.append([i+1,j])
+                    grid[i+1][j]=2
+                if i-1>=0 and grid[i-1][j]==1:
+                    tmpq.append([i-1,j])
+                    grid[i-1][j]=2
+                if j+1<cols and grid[i][j+1]==1:
+                    tmpq.append([i,j+1])
+                    grid[i][j+1]=2
+                if j-1>=0 and grid[i][j-1]==1:
+                    tmpq.append([i,j-1])
+                    grid[i][j-1]=2
+            #print("tmpq",tmpq)
+            q=tmpq
+            tmpq=collections.deque()
+            t+=1
+        
+        for i in range(rows):
+            for j in range(cols):
+                if grid[i][j]==1:
+                    return -1
+        
+        return(t-1)
+ 
+ # Start BFS. 
+ # At every level, pop out all the ndoes, increase time by one, put childrne into new queue
+ # set q=newq after every level.
