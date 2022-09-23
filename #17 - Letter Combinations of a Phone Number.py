@@ -12,10 +12,11 @@ class Solution:
             q.append(i)
         
         x=0
+        reqlen=len(digits)
         
         while q:
             node=q.popleft()
-            if len(node)==len(digits):
+            if len(node)==reqlen:
                 res.append(node)
                 continue
             try:
