@@ -1,0 +1,21 @@
+class Solution:
+    def plusOne(self, digits: List[int]) -> List[int]:
+        if digits[-1]!=9:
+            digits[-1]+=1
+            return(digits)
+        else:
+            i=-1
+            while(digits[i]==9):
+                print(digits[i])
+                digits[i]=0
+                print(digits)
+                if -1*i==len(digits):
+                    digits.insert(0,1)
+                    return(digits)
+                i-=1
+            digits[i]+=1
+            return(digits)
+            
+  # Strat from last, if its not a nine, add 1 and return
+  # else, traverse until you find the last non-9, change everything to 0 and add 1 to the non-9 number
+  # else, if everything is 9, change everything to 0, append 1 to start of list. 
