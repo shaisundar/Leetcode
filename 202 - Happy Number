@@ -1,0 +1,27 @@
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        visited=collections.defaultdict(lambda:0)
+        
+        def getdigs(nums):
+            tmp=nums
+            res=0
+            while tmp>0:
+                m = tmp%10
+                res = res + m*m
+                tmp = tmp//10
+            
+            if res!=1 and visited[res]>0:
+                return False
+      
+            visited[res]+=1
+            if res==1:
+                return True
+           
+            else:
+                return getdigs(res)
+        return getdigs(n) 
+        
+        
+  # Just brute force it. 
+  # need to take care of cases where the res can go into a loop - to solve this, just keep track of all the res gotten till now in a hashmap. 
+  
