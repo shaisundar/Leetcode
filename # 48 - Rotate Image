@@ -1,0 +1,27 @@
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        l=0
+        r=len(matrix[0])-1
+        t=l
+        b=r
+        
+        while l<r:
+            t=l
+            b=r
+            for i in range(r-l):
+                #print(t,l+i,b-i,l)
+                tmp = matrix[t][l+i]
+                matrix[t][l+i]=matrix[b-i][l]
+                matrix[b-i][l]=matrix[b][r-i]
+                matrix[b][r-i]=matrix[t+i][r]
+                matrix[t+i][r]=tmp
+            l+=1
+            r-=1
+        
+        
+   # take one tmp var, store the first element - swap everything in a circle. 
+   # while loop does 1 outer circle at a time
+   # for loop does each element from the loop in action.
