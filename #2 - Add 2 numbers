@@ -1,0 +1,42 @@
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        h1=l1
+        h2=l2
+        res = ListNode()
+        print(res)
+        dummy=res
+        carry=0
+        while h1 or h2:
+            if not h1:
+                s=h2.val+carry
+            if not h2:
+                s=h1.val+carry
+            if h1 and h2:
+                s = h1.val+h2.val+carry
+            restmp=ListNode()
+            if s<9:
+                restmp.val=s
+                carry=0
+            else:
+                restmp.val=s%10
+                carry=s//10
+            if h1:h1=h1.next
+            if h2:h2=h2.next
+            
+            res.next=restmp
+            res=res.next
+       
+        if carry>0:
+            restmp=ListNode()
+            restmp.val=carry
+            res.next=restmp
+            
+        
+        return(dummy.next)
+        
+        
+        
+  # take pointers for both linked lists.
+  # if sum <9, add it to res, else, take mode add it to res and then take div and add to carry
+  # If 1 lists get over quicker, continue only with remaining list
+  # at the end add the carry over if present to a new node. 
